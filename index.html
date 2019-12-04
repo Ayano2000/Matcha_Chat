@@ -26,7 +26,9 @@
     </div>
 </div>
 <script>
+    // Need to convert to plain js
    var socket = io();
+   // gets the message from the form, send name and message back.
     $(() => {
         $("#send").click(()=>{
             sendMessage({name: $("#name").val(), message: $("#message").val()});
@@ -34,14 +36,17 @@
         getMessages()
     })
     socket.on('message', addMessages)
+    // this displays the message
     function addMessages(message){
         $("#messages").append(`<h4> ${message.name} </h4> <p> ${message.message} </p>`)
     }
+    // gets the messages and sendd them to add message to be displayed
     function getMessages(){
       $.get('http://localhost:3000/messages', (data) => {
         data.forEach(addMessages);
       })
     }
+    // sends the message to the backend
     function sendMessage(message){
       $.post('http://localhost:3000/messages', message)
     }
