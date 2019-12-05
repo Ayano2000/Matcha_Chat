@@ -14,9 +14,6 @@
     <br>
     <div class="jumbotron">
         <h1 class="display-4">Send Message</h1>
-        <br>
-        <input id = "name" class="form-control" placeholder="Name">
-        <br>
         <textarea id = "message" class="form-control" placeholder="Your Message Here"></textarea>
         <br>
         <button id="send" class="btn btn-success">Send</button>
@@ -31,7 +28,7 @@
    // gets the message from the form, send name and message back.
     $(() => {
         $("#send").click(()=>{
-            sendMessage({name: $("#name").val(), message: $("#message").val()});
+            sendMessage({message: $("#message").val()});
         })
         getMessages()
     })
@@ -43,6 +40,7 @@
     // gets the messages and sendd them to add message to be displayed
     function getMessages(){
       $.get('http://localhost:3000/messages', (data) => {
+        console.log(data);
         data.forEach(addMessages);
       })
     }

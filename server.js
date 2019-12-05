@@ -14,7 +14,7 @@ var Message = mongoose.model('Message',{
   message : String
 })
 
-var dbUrl = "mongodb+srv://Yano:80058024@cluster0-jszpy.mongodb.net/matcha";
+var dbUrl = "mongodb+srv://Yano:80058024@cluster0-jszpy.mongodb.net/matcha_chat";
 
 // Gets all messages so change this to be messages specifically from the chat
 app.get('/messages', (req, res) => {
@@ -34,7 +34,7 @@ app.get('/messages/:user', (req, res) => {
 // sends the messages and adds them to the db
 app.post('/messages', async (req, res) => {
   try{
-    var message = new Message(req.body);
+    var message = new Message({name: "Arata", message: req.body.message});
 
     var savedMessage = await message.save()
       console.log('saved');
